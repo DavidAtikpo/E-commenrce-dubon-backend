@@ -47,6 +47,7 @@ const wsServer = websocketServer(server); // Ensure you're passing the server in
 
 // Middleware setup
 app.use(session({ secret: 'secret', resave: false, saveUninitialized: true }));
+app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(morgan("dev"));
@@ -57,7 +58,11 @@ app.use(cors({
   methods: ["POST", "GET", "DELETE", "PUT"],
   credentials: true
 }));
-app.use(cookieParser());
+
+app.get("/",(req,res)=>{
+  res.json("Hello")
+})
+app.use('/uploads', express.static(join(__dirname, 'uploads')));
 
 // Routes
 app.use("/api/blog", blogRoute);
@@ -75,7 +80,7 @@ app.use('/api',PaymentRouter)
 app.use('/api',MomoRoutes)
 
 // Serve static images
-app.use('/uploads', express.static(join(__dirname, 'uploads')));
+
 
 // Error handling middleware
 app.use(errorHandler.notFound);
@@ -94,24 +99,24 @@ server.listen(PORT, '0.0.0.0',() => {
 
 // WebSocket connection handling
 // WebSocket connection handling
-wsServer.on('connection', (ws) => {
-  console.log('WebSocket client connected');
+// wsServer.on('connection', (ws) => {
+//   console.log('WebSocket client connected');
 
-  ws.on('message', (message) => {
-    console.log('Received message:', message);
+//   ws.on('message', (message) => {
+//     console.log('Received message:', message);
 
-    // Broadcast message to all connected clients
-    wsServer.clients.forEach(client => {
-      if (client !== ws && client.readyState === client.OPEN) {
-        client.send(message);
-      }
-    });
-  });
+//     // Broadcast message to all connected clients
+//     wsServer.clients.forEach(client => {
+//       if (client !== ws && client.readyState === client.OPEN) {
+//         client.send(message);
+//       }
+//     });
+//   });
 
-  ws.on('close', () => {
-    console.log('WebSocket client disconnected');
-  });
-});
+//   ws.on('close', () => {
+//     console.log('WebSocket client disconnected');
+//   });
+// });
 
 
-console.log('WebSocket server is running');
+// console.log('WebSocket server is running');
