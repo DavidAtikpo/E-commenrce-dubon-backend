@@ -1,5 +1,5 @@
 import User from '../models/userModel.js'; // Modèle utilisateur
-import PromoCode from '../models/PromoCode.js';
+import PromoCode from '../models/promoCode.js';
 
 // Fonction pour générer un code promo aléatoire
 const generatePromoCode = () => {
