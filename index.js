@@ -54,7 +54,7 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors({
-  origin: ["http://localhost:3000","http://192.168.1.69:3000"],
+  origin: ["http://localhost:3000","https://ecommerce-dubon-service-event.vercel.app"],
   methods: ["POST", "GET", "DELETE", "PUT"],
   credentials: true
 }));
