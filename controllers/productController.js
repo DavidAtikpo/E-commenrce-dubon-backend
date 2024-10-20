@@ -269,4 +269,27 @@ const updateProduct = async (req, res) => {
 
 
 
-export default {getProductById,getProductById,createProduct,getNewProduct,getAllProduct,deleteProduct,updateProduct}
+// Récupérer les produits de la même catégorie
+const getProductsByCategory = async (req, res) => {
+  try {
+    const { category } = req.params; // Récupérer la catégorie depuis l'URL
+console.log('category',{category});
+
+    const products = await Product.find({ category });
+
+    if (!products || products.length === 0) {
+      return res.status(404).json({ message: 'Aucun produit trouvé dans cette catégorie.' });
+    }
+
+    res.status(200).json(products);
+  } catch (error) {
+    console.error('Erreur lors de la récupération des produits par catégorie :', error);
+    res.status(500).json({ message: 'Erreur serveur.' });
+  }
+};
+
+
+
+
+
+export default {getProductsByCategory,getProductById,getProductById,createProduct,getNewProduct,getAllProduct,deleteProduct,updateProduct}

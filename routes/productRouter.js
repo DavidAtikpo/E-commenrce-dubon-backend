@@ -14,6 +14,7 @@ router.get('/get-product/:productId', productController.getProductById);
 router.get('/',productController.getAllProduct);
 router.get('/getNewProduct',productController.getNewProduct)
 router.put('/update-product/:productId',productController.updateProduct)
+router.get('/category/:category',productController.getProductsByCategory);
 // router.put('/:id', middleware.authMiddleware, middleware.isAdmin, productCtrl.updateProduct);
 // router.delete('/:id', middleware.authMiddleware, middleware.isAdmin, productCtrl.deleteProduct);
 router.delete('/delete-product/:productId',productController.deleteProduct)
